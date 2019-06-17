@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dmall.ws.newdao.mapper.WsWorkOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.dmall.ws.newdao.model.WsWorkOrder" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="work_order_num" property="workOrderNum" jdbcType="VARCHAR" />
+    <result column="tel_num" property="telNum" jdbcType="VARCHAR" />
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="TINYINT" />
+    <result column="order_sale_type" property="orderSaleType" jdbcType="TINYINT" />
+    <result column="problem_types_id" property="problemTypesId" jdbcType="INTEGER" />
+    <result column="order_store_id" property="orderStoreId" jdbcType="BIGINT" />
+    <result column="store_id" property="storeId" jdbcType="BIGINT" />
+    <result column="grade" property="grade" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="record_status" property="recordStatus" jdbcType="INTEGER" />
+    <result column="msg_type" property="msgType" jdbcType="TINYINT" />
+    <result column="close_status" property="closeStatus" jdbcType="VARCHAR" />
+    <result column="sender_id" property="senderId" jdbcType="INTEGER" />
+    <result column="sender_name" property="senderName" jdbcType="VARCHAR" />
+    <result column="sendee_id" property="sendeeId" jdbcType="INTEGER" />
+    <result column="sendee_name" property="sendeeName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="receive_time" property="receiveTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+    <result column="record" property="record" jdbcType="VARCHAR" />
+    <result column="create_id" property="createId" jdbcType="BIGINT" />
+    <result column="create_name" property="createName" jdbcType="VARCHAR" />
+    <result column="current_num" property="currentNum" jdbcType="INTEGER" />
+    <result column="reminder_num" property="reminderNum" jdbcType="INTEGER" />
+    <result column="reminder_time" property="reminderTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="user_tel_num" property="userTelNum" jdbcType="VARCHAR" />
+    <result column="feed_back_snapshoots" property="feedBackSnapshoots" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="app_vender_id" property="appVenderId" jdbcType="BIGINT" />
+    <result column="app_store_id" property="appStoreId" jdbcType="BIGINT" />
+    <result column="feedback_id" property="feedbackId" jdbcType="BIGINT" />
+    <result column="app_problem_id" property="appProblemId" jdbcType="INTEGER" />
+    <result column="closer_name" property="closerName" jdbcType="VARCHAR" />
+    <result column="shipment_type" property="shipmentType" jdbcType="TINYINT" />
+    <result column="sale_type" property="saleType" jdbcType="TINYINT" />
+    <result column="contact_person" property="contactPerson" jdbcType="VARCHAR" />
+    <result column="consignee" property="consignee" jdbcType="VARCHAR" />
+    <result column="consignee_tel" property="consigneeTel" jdbcType="VARCHAR" />
+    <result column="large_area" property="largeArea" jdbcType="INTEGER" />
+    <result column="update_log_id" property="updateLogId" jdbcType="BIGINT" />
+    <result column="app_feedback" property="appFeedback" jdbcType="VARCHAR" />
+    <result column="duty_type" property="dutyType" jdbcType="TINYINT" />
+    <result column="parent_order_id" property="parentOrderId" jdbcType="BIGINT" />
+    <result column="ship_datetime" property="shipDatetime" jdbcType="VARCHAR" />
+    <result column="duty_value" property="dutyValue" jdbcType="VARCHAR" />
+    <result column="store_reply_num" property="storeReplyNum" jdbcType="INTEGER" />
+    <result column="duty_op" property="dutyOp" jdbcType="TINYINT" />
+    <result column="staff_num" property="staffNum" jdbcType="VARCHAR" />
+    <result column="apply_order_num" property="applyOrderNum" jdbcType="VARCHAR" />
+    <result column="aftersale_order_num" property="aftersaleOrderNum" jdbcType="BIGINT" />
+    <result column="apply_return_num" property="applyReturnNum" jdbcType="INTEGER" />
+    <result column="locked" property="locked" jdbcType="TINYINT" />
+    <result column="yn" property="yn" jdbcType="TINYINT" />
+    <result column="follow_up" property="followUp" jdbcType="TINYINT" />
+    <result column="extend" property="extend" jdbcType="OTHER" />
+    <result column="sender_real_name" property="senderRealName" jdbcType="VARCHAR" />
+    <result column="vender_id" property="venderId" jdbcType="BIGINT" />
+    <result column="pickup_order_id" property="pickupOrderId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Condition_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Condition_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, work_order_num, tel_num, order_num, order_type, order_sale_type, problem_types_id, 
+    order_store_id, store_id, grade, title, content, remark, status, record_status, msg_type, 
+    close_status, sender_id, sender_name, sendee_id, sendee_name, create_time, submit_time, 
+    receive_time, end_time, last_update_time, record, create_id, create_name, current_num, 
+    reminder_num, reminder_time, type, user_tel_num, feed_back_snapshoots, user_id, user_name, 
+    app_vender_id, app_store_id, feedback_id, app_problem_id, closer_name, shipment_type, 
+    sale_type, contact_person, consignee, consignee_tel, large_area, update_log_id, app_feedback, 
+    duty_type, parent_order_id, ship_datetime, duty_value, store_reply_num, duty_op, 
+    staff_num, apply_order_num, aftersale_order_num, apply_return_num, locked, yn, follow_up, 
+    extend, sender_real_name, vender_id, pickup_order_id
+  </sql>
+  <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.dmall.ws.newdao.model.WsWorkOrderCondition" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ws_work_order
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitOffset >= 0" >
+       limit ${limitOffset} , ${limitSize}
+    </if>
+  </select>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ws_work_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from ws_work_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByCondition" parameterType="com.dmall.ws.newdao.model.WsWorkOrderCondition" >
+    delete from ws_work_order
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dmall.ws.newdao.model.WsWorkOrder" >
+    insert into ws_work_order (id, work_order_num, tel_num, 
+      order_num, order_type, order_sale_type, 
+      problem_types_id, order_store_id, store_id, 
+      grade, title, content, 
+      remark, status, record_status, 
+      msg_type, close_status, sender_id, 
+      sender_name, sendee_id, sendee_name, 
+      create_time, submit_time, receive_time, 
+      end_time, last_update_time, record, 
+      create_id, create_name, current_num, 
+      reminder_num, reminder_time, type, 
+      user_tel_num, feed_back_snapshoots, user_id, 
+      user_name, app_vender_id, app_store_id, 
+      feedback_id, app_problem_id, closer_name, 
+      shipment_type, sale_type, contact_person, 
+      consignee, consignee_tel, large_area, 
+      update_log_id, app_feedback, duty_type, 
+      parent_order_id, ship_datetime, duty_value, 
+      store_reply_num, duty_op, staff_num, 
+      apply_order_num, aftersale_order_num, apply_return_num, 
+      locked, yn, follow_up, 
+      extend, sender_real_name, vender_id, 
+      pickup_order_id)
+    values (#{id,jdbcType=BIGINT}, #{workOrderNum,jdbcType=VARCHAR}, #{telNum,jdbcType=VARCHAR}, 
+      #{orderNum,jdbcType=VARCHAR}, #{orderType,jdbcType=TINYINT}, #{orderSaleType,jdbcType=TINYINT}, 
+      #{problemTypesId,jdbcType=INTEGER}, #{orderStoreId,jdbcType=BIGINT}, #{storeId,jdbcType=BIGINT}, 
+      #{grade,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{recordStatus,jdbcType=INTEGER}, 
+      #{msgType,jdbcType=TINYINT}, #{closeStatus,jdbcType=VARCHAR}, #{senderId,jdbcType=INTEGER}, 
+      #{senderName,jdbcType=VARCHAR}, #{sendeeId,jdbcType=INTEGER}, #{sendeeName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{submitTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP}, #{record,jdbcType=VARCHAR}, 
+      #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{currentNum,jdbcType=INTEGER}, 
+      #{reminderNum,jdbcType=INTEGER}, #{reminderTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT}, 
+      #{userTelNum,jdbcType=VARCHAR}, #{feedBackSnapshoots,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{userName,jdbcType=VARCHAR}, #{appVenderId,jdbcType=BIGINT}, #{appStoreId,jdbcType=BIGINT}, 
+      #{feedbackId,jdbcType=BIGINT}, #{appProblemId,jdbcType=INTEGER}, #{closerName,jdbcType=VARCHAR}, 
+      #{shipmentType,jdbcType=TINYINT}, #{saleType,jdbcType=TINYINT}, #{contactPerson,jdbcType=VARCHAR}, 
+      #{consignee,jdbcType=VARCHAR}, #{consigneeTel,jdbcType=VARCHAR}, #{largeArea,jdbcType=INTEGER}, 
+      #{updateLogId,jdbcType=BIGINT}, #{appFeedback,jdbcType=VARCHAR}, #{dutyType,jdbcType=TINYINT}, 
+      #{parentOrderId,jdbcType=BIGINT}, #{shipDatetime,jdbcType=VARCHAR}, #{dutyValue,jdbcType=VARCHAR}, 
+      #{storeReplyNum,jdbcType=INTEGER}, #{dutyOp,jdbcType=TINYINT}, #{staffNum,jdbcType=VARCHAR}, 
+      #{applyOrderNum,jdbcType=VARCHAR}, #{aftersaleOrderNum,jdbcType=BIGINT}, #{applyReturnNum,jdbcType=INTEGER}, 
+      #{locked,jdbcType=TINYINT}, #{yn,jdbcType=TINYINT}, #{followUp,jdbcType=TINYINT}, 
+      #{extend,jdbcType=OTHER}, #{senderRealName,jdbcType=VARCHAR}, #{venderId,jdbcType=BIGINT}, 
+      #{pickupOrderId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dmall.ws.newdao.model.WsWorkOrder" >
+    insert into ws_work_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="workOrderNum != null" >
+        work_order_num,
+      </if>
+      <if test="telNum != null" >
+        tel_num,
+      </if>
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="orderSaleType != null" >
+        order_sale_type,
+      </if>
+      <if test="problemTypesId != null" >
+        problem_types_id,
+      </if>
+      <if test="orderStoreId != null" >
+        order_store_id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="grade != null" >
+        grade,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="recordStatus != null" >
+        record_status,
+      </if>
+      <if test="msgType != null" >
+        msg_type,
+      </if>
+      <if test="closeStatus != null" >
+        close_status,
+      </if>
+      <if test="senderId != null" >
+        sender_id,
+      </if>
+      <if test="senderName != null" >
+        sender_name,
+      </if>
+      <if test="sendeeId != null" >
+        sendee_id,
+      </if>
+      <if test="sendeeName != null" >
+        sendee_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+      <if test="receiveTime != null" >
+        receive_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time,
+      </if>
+      <if test="record != null" >
+        record,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="createName != null" >
+        create_name,
+      </if>
+      <if test="currentNum != null" >
+        current_num,
+      </if>
+      <if test="reminderNum != null" >
+        reminder_num,
+      </if>
+      <if test="reminderTime != null" >
+        reminder_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="userTelNum != null" >
+        user_tel_num,
+      </if>
+      <if test="feedBackSnapshoots != null" >
+        feed_back_snapshoots,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="appVenderId != null" >
+        app_vender_id,
+      </if>
+      <if test="appStoreId != null" >
+        app_store_id,
+      </if>
+      <if test="feedbackId != null" >
+        feedback_id,
+      </if>
+      <if test="appProblemId != null" >
+        app_problem_id,
+      </if>
+      <if test="closerName != null" >
+        closer_name,
+      </if>
+      <if test="shipmentType != null" >
+        shipment_type,
+      </if>
+      <if test="saleType != null" >
+        sale_type,
+      </if>
+      <if test="contactPerson != null" >
+        contact_person,
+      </if>
+      <if test="consignee != null" >
+        consignee,
+      </if>
+      <if test="consigneeTel != null" >
+        consignee_tel,
+      </if>
+      <if test="largeArea != null" >
+        large_area,
+      </if>
+      <if test="updateLogId != null" >
+        update_log_id,
+      </if>
+      <if test="appFeedback != null" >
+        app_feedback,
+      </if>
+      <if test="dutyType != null" >
+        duty_type,
+      </if>
+      <if test="parentOrderId != null" >
+        parent_order_id,
+      </if>
+      <if test="shipDatetime != null" >
+        ship_datetime,
+      </if>
+      <if test="dutyValue != null" >
+        duty_value,
+      </if>
+      <if test="storeReplyNum != null" >
+        store_reply_num,
+      </if>
+      <if test="dutyOp != null" >
+        duty_op,
+      </if>
+      <if test="staffNum != null" >
+        staff_num,
+      </if>
+      <if test="applyOrderNum != null" >
+        apply_order_num,
+      </if>
+      <if test="aftersaleOrderNum != null" >
+        aftersale_order_num,
+      </if>
+      <if test="applyReturnNum != null" >
+        apply_return_num,
+      </if>
+      <if test="locked != null" >
+        locked,
+      </if>
+      <if test="yn != null" >
+        yn,
+      </if>
+      <if test="followUp != null" >
+        follow_up,
+      </if>
+      <if test="extend != null" >
+        extend,
+      </if>
+      <if test="senderRealName != null" >
+        sender_real_name,
+      </if>
+      <if test="venderId != null" >
+        vender_id,
+      </if>
+      <if test="pickupOrderId != null" >
+        pickup_order_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="workOrderNum != null" >
+        #{workOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="telNum != null" >
+        #{telNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="orderSaleType != null" >
+        #{orderSaleType,jdbcType=TINYINT},
+      </if>
+      <if test="problemTypesId != null" >
+        #{problemTypesId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStoreId != null" >
+        #{orderStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="recordStatus != null" >
+        #{recordStatus,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null" >
+        #{msgType,jdbcType=TINYINT},
+      </if>
+      <if test="closeStatus != null" >
+        #{closeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null" >
+        #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="senderName != null" >
+        #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendeeId != null" >
+        #{sendeeId,jdbcType=INTEGER},
+      </if>
+      <if test="sendeeName != null" >
+        #{sendeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null" >
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record != null" >
+        #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNum != null" >
+        #{currentNum,jdbcType=INTEGER},
+      </if>
+      <if test="reminderNum != null" >
+        #{reminderNum,jdbcType=INTEGER},
+      </if>
+      <if test="reminderTime != null" >
+        #{reminderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="userTelNum != null" >
+        #{userTelNum,jdbcType=VARCHAR},
+      </if>
+      <if test="feedBackSnapshoots != null" >
+        #{feedBackSnapshoots,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="appVenderId != null" >
+        #{appVenderId,jdbcType=BIGINT},
+      </if>
+      <if test="appStoreId != null" >
+        #{appStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="feedbackId != null" >
+        #{feedbackId,jdbcType=BIGINT},
+      </if>
+      <if test="appProblemId != null" >
+        #{appProblemId,jdbcType=INTEGER},
+      </if>
+      <if test="closerName != null" >
+        #{closerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentType != null" >
+        #{shipmentType,jdbcType=TINYINT},
+      </if>
+      <if test="saleType != null" >
+        #{saleType,jdbcType=TINYINT},
+      </if>
+      <if test="contactPerson != null" >
+        #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeTel != null" >
+        #{consigneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="largeArea != null" >
+        #{largeArea,jdbcType=INTEGER},
+      </if>
+      <if test="updateLogId != null" >
+        #{updateLogId,jdbcType=BIGINT},
+      </if>
+      <if test="appFeedback != null" >
+        #{appFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyType != null" >
+        #{dutyType,jdbcType=TINYINT},
+      </if>
+      <if test="parentOrderId != null" >
+        #{parentOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="shipDatetime != null" >
+        #{shipDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyValue != null" >
+        #{dutyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="storeReplyNum != null" >
+        #{storeReplyNum,jdbcType=INTEGER},
+      </if>
+      <if test="dutyOp != null" >
+        #{dutyOp,jdbcType=TINYINT},
+      </if>
+      <if test="staffNum != null" >
+        #{staffNum,jdbcType=VARCHAR},
+      </if>
+      <if test="applyOrderNum != null" >
+        #{applyOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="aftersaleOrderNum != null" >
+        #{aftersaleOrderNum,jdbcType=BIGINT},
+      </if>
+      <if test="applyReturnNum != null" >
+        #{applyReturnNum,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        #{locked,jdbcType=TINYINT},
+      </if>
+      <if test="yn != null" >
+        #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="followUp != null" >
+        #{followUp,jdbcType=TINYINT},
+      </if>
+      <if test="extend != null" >
+        #{extend,jdbcType=OTHER},
+      </if>
+      <if test="senderRealName != null" >
+        #{senderRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="venderId != null" >
+        #{venderId,jdbcType=BIGINT},
+      </if>
+      <if test="pickupOrderId != null" >
+        #{pickupOrderId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCondition" parameterType="com.dmall.ws.newdao.model.WsWorkOrderCondition" resultType="java.lang.Integer" >
+    select count(*) from ws_work_order
+    <if test="_parameter != null" >
+      <include refid="Condition_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByConditionSelective" parameterType="map" >
+    update ws_work_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.workOrderNum != null" >
+        work_order_num = #{record.workOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telNum != null" >
+        tel_num = #{record.telNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNum != null" >
+        order_num = #{record.orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderType != null" >
+        order_type = #{record.orderType,jdbcType=TINYINT},
+      </if>
+      <if test="record.orderSaleType != null" >
+        order_sale_type = #{record.orderSaleType,jdbcType=TINYINT},
+      </if>
+      <if test="record.problemTypesId != null" >
+        problem_types_id = #{record.problemTypesId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderStoreId != null" >
+        order_store_id = #{record.orderStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="record.storeId != null" >
+        store_id = #{record.storeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.grade != null" >
+        grade = #{record.grade,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.recordStatus != null" >
+        record_status = #{record.recordStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgType != null" >
+        msg_type = #{record.msgType,jdbcType=TINYINT},
+      </if>
+      <if test="record.closeStatus != null" >
+        close_status = #{record.closeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.senderId != null" >
+        sender_id = #{record.senderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.senderName != null" >
+        sender_name = #{record.senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendeeId != null" >
+        sendee_id = #{record.sendeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendeeName != null" >
+        sendee_name = #{record.sendeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.submitTime != null" >
+        submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.receiveTime != null" >
+        receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastUpdateTime != null" >
+        last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.record != null" >
+        record = #{record.record,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createId != null" >
+        create_id = #{record.createId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createName != null" >
+        create_name = #{record.createName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentNum != null" >
+        current_num = #{record.currentNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.reminderNum != null" >
+        reminder_num = #{record.reminderNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.reminderTime != null" >
+        reminder_time = #{record.reminderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.userTelNum != null" >
+        user_tel_num = #{record.userTelNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedBackSnapshoots != null" >
+        feed_back_snapshoots = #{record.feedBackSnapshoots,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appVenderId != null" >
+        app_vender_id = #{record.appVenderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.appStoreId != null" >
+        app_store_id = #{record.appStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="record.feedbackId != null" >
+        feedback_id = #{record.feedbackId,jdbcType=BIGINT},
+      </if>
+      <if test="record.appProblemId != null" >
+        app_problem_id = #{record.appProblemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.closerName != null" >
+        closer_name = #{record.closerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipmentType != null" >
+        shipment_type = #{record.shipmentType,jdbcType=TINYINT},
+      </if>
+      <if test="record.saleType != null" >
+        sale_type = #{record.saleType,jdbcType=TINYINT},
+      </if>
+      <if test="record.contactPerson != null" >
+        contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consignee != null" >
+        consignee = #{record.consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consigneeTel != null" >
+        consignee_tel = #{record.consigneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.largeArea != null" >
+        large_area = #{record.largeArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateLogId != null" >
+        update_log_id = #{record.updateLogId,jdbcType=BIGINT},
+      </if>
+      <if test="record.appFeedback != null" >
+        app_feedback = #{record.appFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyType != null" >
+        duty_type = #{record.dutyType,jdbcType=TINYINT},
+      </if>
+      <if test="record.parentOrderId != null" >
+        parent_order_id = #{record.parentOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.shipDatetime != null" >
+        ship_datetime = #{record.shipDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyValue != null" >
+        duty_value = #{record.dutyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeReplyNum != null" >
+        store_reply_num = #{record.storeReplyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.dutyOp != null" >
+        duty_op = #{record.dutyOp,jdbcType=TINYINT},
+      </if>
+      <if test="record.staffNum != null" >
+        staff_num = #{record.staffNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyOrderNum != null" >
+        apply_order_num = #{record.applyOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.aftersaleOrderNum != null" >
+        aftersale_order_num = #{record.aftersaleOrderNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.applyReturnNum != null" >
+        apply_return_num = #{record.applyReturnNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.locked != null" >
+        locked = #{record.locked,jdbcType=TINYINT},
+      </if>
+      <if test="record.yn != null" >
+        yn = #{record.yn,jdbcType=TINYINT},
+      </if>
+      <if test="record.followUp != null" >
+        follow_up = #{record.followUp,jdbcType=TINYINT},
+      </if>
+      <if test="record.extend != null" >
+        extend = #{record.extend,jdbcType=OTHER},
+      </if>
+      <if test="record.senderRealName != null" >
+        sender_real_name = #{record.senderRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.venderId != null" >
+        vender_id = #{record.venderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pickupOrderId != null" >
+        pickup_order_id = #{record.pickupOrderId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCondition" parameterType="map" >
+    update ws_work_order
+    set id = #{record.id,jdbcType=BIGINT},
+      work_order_num = #{record.workOrderNum,jdbcType=VARCHAR},
+      tel_num = #{record.telNum,jdbcType=VARCHAR},
+      order_num = #{record.orderNum,jdbcType=VARCHAR},
+      order_type = #{record.orderType,jdbcType=TINYINT},
+      order_sale_type = #{record.orderSaleType,jdbcType=TINYINT},
+      problem_types_id = #{record.problemTypesId,jdbcType=INTEGER},
+      order_store_id = #{record.orderStoreId,jdbcType=BIGINT},
+      store_id = #{record.storeId,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      record_status = #{record.recordStatus,jdbcType=INTEGER},
+      msg_type = #{record.msgType,jdbcType=TINYINT},
+      close_status = #{record.closeStatus,jdbcType=VARCHAR},
+      sender_id = #{record.senderId,jdbcType=INTEGER},
+      sender_name = #{record.senderName,jdbcType=VARCHAR},
+      sendee_id = #{record.sendeeId,jdbcType=INTEGER},
+      sendee_name = #{record.sendeeName,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      submit_time = #{record.submitTime,jdbcType=TIMESTAMP},
+      receive_time = #{record.receiveTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      last_update_time = #{record.lastUpdateTime,jdbcType=TIMESTAMP},
+      record = #{record.record,jdbcType=VARCHAR},
+      create_id = #{record.createId,jdbcType=BIGINT},
+      create_name = #{record.createName,jdbcType=VARCHAR},
+      current_num = #{record.currentNum,jdbcType=INTEGER},
+      reminder_num = #{record.reminderNum,jdbcType=INTEGER},
+      reminder_time = #{record.reminderTime,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=TINYINT},
+      user_tel_num = #{record.userTelNum,jdbcType=VARCHAR},
+      feed_back_snapshoots = #{record.feedBackSnapshoots,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      app_vender_id = #{record.appVenderId,jdbcType=BIGINT},
+      app_store_id = #{record.appStoreId,jdbcType=BIGINT},
+      feedback_id = #{record.feedbackId,jdbcType=BIGINT},
+      app_problem_id = #{record.appProblemId,jdbcType=INTEGER},
+      closer_name = #{record.closerName,jdbcType=VARCHAR},
+      shipment_type = #{record.shipmentType,jdbcType=TINYINT},
+      sale_type = #{record.saleType,jdbcType=TINYINT},
+      contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+      consignee = #{record.consignee,jdbcType=VARCHAR},
+      consignee_tel = #{record.consigneeTel,jdbcType=VARCHAR},
+      large_area = #{record.largeArea,jdbcType=INTEGER},
+      update_log_id = #{record.updateLogId,jdbcType=BIGINT},
+      app_feedback = #{record.appFeedback,jdbcType=VARCHAR},
+      duty_type = #{record.dutyType,jdbcType=TINYINT},
+      parent_order_id = #{record.parentOrderId,jdbcType=BIGINT},
+      ship_datetime = #{record.shipDatetime,jdbcType=VARCHAR},
+      duty_value = #{record.dutyValue,jdbcType=VARCHAR},
+      store_reply_num = #{record.storeReplyNum,jdbcType=INTEGER},
+      duty_op = #{record.dutyOp,jdbcType=TINYINT},
+      staff_num = #{record.staffNum,jdbcType=VARCHAR},
+      apply_order_num = #{record.applyOrderNum,jdbcType=VARCHAR},
+      aftersale_order_num = #{record.aftersaleOrderNum,jdbcType=BIGINT},
+      apply_return_num = #{record.applyReturnNum,jdbcType=INTEGER},
+      locked = #{record.locked,jdbcType=TINYINT},
+      yn = #{record.yn,jdbcType=TINYINT},
+      follow_up = #{record.followUp,jdbcType=TINYINT},
+      extend = #{record.extend,jdbcType=OTHER},
+      sender_real_name = #{record.senderRealName,jdbcType=VARCHAR},
+      vender_id = #{record.venderId,jdbcType=BIGINT},
+      pickup_order_id = #{record.pickupOrderId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Condition_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByIdSelective" parameterType="com.dmall.ws.newdao.model.WsWorkOrder" >
+    update ws_work_order
+    <set >
+      <if test="workOrderNum != null" >
+        work_order_num = #{workOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="telNum != null" >
+        tel_num = #{telNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="orderSaleType != null" >
+        order_sale_type = #{orderSaleType,jdbcType=TINYINT},
+      </if>
+      <if test="problemTypesId != null" >
+        problem_types_id = #{problemTypesId,jdbcType=INTEGER},
+      </if>
+      <if test="orderStoreId != null" >
+        order_store_id = #{orderStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=BIGINT},
+      </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="recordStatus != null" >
+        record_status = #{recordStatus,jdbcType=INTEGER},
+      </if>
+      <if test="msgType != null" >
+        msg_type = #{msgType,jdbcType=TINYINT},
+      </if>
+      <if test="closeStatus != null" >
+        close_status = #{closeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="senderId != null" >
+        sender_id = #{senderId,jdbcType=INTEGER},
+      </if>
+      <if test="senderName != null" >
+        sender_name = #{senderName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendeeId != null" >
+        sendee_id = #{sendeeId,jdbcType=INTEGER},
+      </if>
+      <if test="sendeeName != null" >
+        sendee_name = #{sendeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveTime != null" >
+        receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record != null" >
+        record = #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=BIGINT},
+      </if>
+      <if test="createName != null" >
+        create_name = #{createName,jdbcType=VARCHAR},
+      </if>
+      <if test="currentNum != null" >
+        current_num = #{currentNum,jdbcType=INTEGER},
+      </if>
+      <if test="reminderNum != null" >
+        reminder_num = #{reminderNum,jdbcType=INTEGER},
+      </if>
+      <if test="reminderTime != null" >
+        reminder_time = #{reminderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="userTelNum != null" >
+        user_tel_num = #{userTelNum,jdbcType=VARCHAR},
+      </if>
+      <if test="feedBackSnapshoots != null" >
+        feed_back_snapshoots = #{feedBackSnapshoots,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="appVenderId != null" >
+        app_vender_id = #{appVenderId,jdbcType=BIGINT},
+      </if>
+      <if test="appStoreId != null" >
+        app_store_id = #{appStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="feedbackId != null" >
+        feedback_id = #{feedbackId,jdbcType=BIGINT},
+      </if>
+      <if test="appProblemId != null" >
+        app_problem_id = #{appProblemId,jdbcType=INTEGER},
+      </if>
+      <if test="closerName != null" >
+        closer_name = #{closerName,jdbcType=VARCHAR},
+      </if>
+      <if test="shipmentType != null" >
+        shipment_type = #{shipmentType,jdbcType=TINYINT},
+      </if>
+      <if test="saleType != null" >
+        sale_type = #{saleType,jdbcType=TINYINT},
+      </if>
+      <if test="contactPerson != null" >
+        contact_person = #{contactPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="consignee != null" >
+        consignee = #{consignee,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneeTel != null" >
+        consignee_tel = #{consigneeTel,jdbcType=VARCHAR},
+      </if>
+      <if test="largeArea != null" >
+        large_area = #{largeArea,jdbcType=INTEGER},
+      </if>
+      <if test="updateLogId != null" >
+        update_log_id = #{updateLogId,jdbcType=BIGINT},
+      </if>
+      <if test="appFeedback != null" >
+        app_feedback = #{appFeedback,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyType != null" >
+        duty_type = #{dutyType,jdbcType=TINYINT},
+      </if>
+      <if test="parentOrderId != null" >
+        parent_order_id = #{parentOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="shipDatetime != null" >
+        ship_datetime = #{shipDatetime,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyValue != null" >
+        duty_value = #{dutyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="storeReplyNum != null" >
+        store_reply_num = #{storeReplyNum,jdbcType=INTEGER},
+      </if>
+      <if test="dutyOp != null" >
+        duty_op = #{dutyOp,jdbcType=TINYINT},
+      </if>
+      <if test="staffNum != null" >
+        staff_num = #{staffNum,jdbcType=VARCHAR},
+      </if>
+      <if test="applyOrderNum != null" >
+        apply_order_num = #{applyOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="aftersaleOrderNum != null" >
+        aftersale_order_num = #{aftersaleOrderNum,jdbcType=BIGINT},
+      </if>
+      <if test="applyReturnNum != null" >
+        apply_return_num = #{applyReturnNum,jdbcType=INTEGER},
+      </if>
+      <if test="locked != null" >
+        locked = #{locked,jdbcType=TINYINT},
+      </if>
+      <if test="yn != null" >
+        yn = #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="followUp != null" >
+        follow_up = #{followUp,jdbcType=TINYINT},
+      </if>
+      <if test="extend != null" >
+        extend = #{extend,jdbcType=OTHER},
+      </if>
+      <if test="senderRealName != null" >
+        sender_real_name = #{senderRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="venderId != null" >
+        vender_id = #{venderId,jdbcType=BIGINT},
+      </if>
+      <if test="pickupOrderId != null" >
+        pickup_order_id = #{pickupOrderId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateById" parameterType="com.dmall.ws.newdao.model.WsWorkOrder" >
+    update ws_work_order
+    set work_order_num = #{workOrderNum,jdbcType=VARCHAR},
+      tel_num = #{telNum,jdbcType=VARCHAR},
+      order_num = #{orderNum,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=TINYINT},
+      order_sale_type = #{orderSaleType,jdbcType=TINYINT},
+      problem_types_id = #{problemTypesId,jdbcType=INTEGER},
+      order_store_id = #{orderStoreId,jdbcType=BIGINT},
+      store_id = #{storeId,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      record_status = #{recordStatus,jdbcType=INTEGER},
+      msg_type = #{msgType,jdbcType=TINYINT},
+      close_status = #{closeStatus,jdbcType=VARCHAR},
+      sender_id = #{senderId,jdbcType=INTEGER},
+      sender_name = #{senderName,jdbcType=VARCHAR},
+      sendee_id = #{sendeeId,jdbcType=INTEGER},
+      sendee_name = #{sendeeName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      receive_time = #{receiveTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      record = #{record,jdbcType=VARCHAR},
+      create_id = #{createId,jdbcType=BIGINT},
+      create_name = #{createName,jdbcType=VARCHAR},
+      current_num = #{currentNum,jdbcType=INTEGER},
+      reminder_num = #{reminderNum,jdbcType=INTEGER},
+      reminder_time = #{reminderTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TINYINT},
+      user_tel_num = #{userTelNum,jdbcType=VARCHAR},
+      feed_back_snapshoots = #{feedBackSnapshoots,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      app_vender_id = #{appVenderId,jdbcType=BIGINT},
+      app_store_id = #{appStoreId,jdbcType=BIGINT},
+      feedback_id = #{feedbackId,jdbcType=BIGINT},
+      app_problem_id = #{appProblemId,jdbcType=INTEGER},
+      closer_name = #{closerName,jdbcType=VARCHAR},
+      shipment_type = #{shipmentType,jdbcType=TINYINT},
+      sale_type = #{saleType,jdbcType=TINYINT},
+      contact_person = #{contactPerson,jdbcType=VARCHAR},
+      consignee = #{consignee,jdbcType=VARCHAR},
+      consignee_tel = #{consigneeTel,jdbcType=VARCHAR},
+      large_area = #{largeArea,jdbcType=INTEGER},
+      update_log_id = #{updateLogId,jdbcType=BIGINT},
+      app_feedback = #{appFeedback,jdbcType=VARCHAR},
+      duty_type = #{dutyType,jdbcType=TINYINT},
+      parent_order_id = #{parentOrderId,jdbcType=BIGINT},
+      ship_datetime = #{shipDatetime,jdbcType=VARCHAR},
+      duty_value = #{dutyValue,jdbcType=VARCHAR},
+      store_reply_num = #{storeReplyNum,jdbcType=INTEGER},
+      duty_op = #{dutyOp,jdbcType=TINYINT},
+      staff_num = #{staffNum,jdbcType=VARCHAR},
+      apply_order_num = #{applyOrderNum,jdbcType=VARCHAR},
+      aftersale_order_num = #{aftersaleOrderNum,jdbcType=BIGINT},
+      apply_return_num = #{applyReturnNum,jdbcType=INTEGER},
+      locked = #{locked,jdbcType=TINYINT},
+      yn = #{yn,jdbcType=TINYINT},
+      follow_up = #{followUp,jdbcType=TINYINT},
+      extend = #{extend,jdbcType=OTHER},
+      sender_real_name = #{senderRealName,jdbcType=VARCHAR},
+      vender_id = #{venderId,jdbcType=BIGINT},
+      pickup_order_id = #{pickupOrderId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

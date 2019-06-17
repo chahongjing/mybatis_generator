@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!--  <classPathEntry location="D:\maven-repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar"/>  -->
+    <properties resource="mysql.properties"></properties>
+
+    <context id="context1" targetRuntime="MyBatis3">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+            <property name="searchString" value="Example$"/>
+            <property name="replaceString" value="Condition"/>
+        </plugin>
+
+        <plugin type="com.zjy.mybatis.RenameExampleAndPrimaryKeyPlugin" />
+        <plugin type="com.zjy.mybatis.MysqlPagingPlugin" />
+        <plugin type="com.zjy.mybatis.CommentPlugin">
+            <!-- 制定java bean的作者，默认情况下会读取计算机当前用户作为作者 -->
+            <!--<property name="modelClassAuthor" value="p0po" />-->
+        </plugin>
+
+        <commentGenerator>
+            <!-- 不生成原生的注解信息 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection
+                driverClass="${driver}"
+                connectionURL="${url}"
+                userId="${username}"
+                password="${password}"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.dmall.ws.newdao.model" targetProject="${modelurl}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.dmall.ws.newdao." targetProject="${mapperurl}"/>
+
+        <javaClientGenerator targetPackage="com.dmall.ws.newdao.mapper" targetProject="${xmlurl}" type="XMLMAPPER"/>
+
+        <!--
+        <table tableName="LN_FENG_APPROVAL_HISTORY" domainObjectName="LnFengApprovalHistory">
+            <generatedKey column="id" identity="true" sqlStatement="mysql"/>
+    -->
+            <!--
+            <columnOverride column="type" javaType="com.krplus.enums.OrgType"></columnOverride>
+            -->
+       <!--
+        </table>
+    -->
+
+        <table tableName="ws_appeal_order" domainObjectName="AppealOrder"></table>
+        <table tableName="ws_work_order" domainObjectName="WsWorkOrder"></table>
+        <!--<table tableName="u_user_role" domainObjectName="UUserRole"></table>-->
+        <!--<table tableName="u_permission" domainObjectName="UPermission"></table>-->
+        <!--<table tableName="u_role_permission" domainObjectName="URolePermission"></table>-->
+    </context>
+</generatorConfiguration>
