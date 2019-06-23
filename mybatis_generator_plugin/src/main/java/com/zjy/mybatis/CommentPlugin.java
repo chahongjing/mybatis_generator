@@ -18,17 +18,14 @@ import java.util.List;
 public class CommentPlugin extends PluginAdapter {
     private static final String AUTHOR = "modelClassAuthor";
 
-    public boolean modelFieldGenerated(Field field, TopLevelClass topLevelClass,
-                                       IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable,
-                                       ModelClassType modelClassType) {
-        String remark = introspectedColumn.getRemarks();
-        field.addJavaDocLine("/** " + remark + " */");
-
-        return true;
-    }
-
-    public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass,
-                                                 IntrospectedTable introspectedTable) {
+    /**
+     * 给类添加注释
+     *
+     * @param topLevelClass
+     * @param introspectedTable
+     * @return
+     */
+    public boolean modelBaseRecordClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         String remarks = "";
         String author = getProperties().getProperty(AUTHOR);
         if (null == author || "".equals(author)) {
@@ -46,21 +43,37 @@ public class CommentPlugin extends PluginAdapter {
                 remarks = rs.getString("REMARKS");
             }
             closeConnection(connection, rs);
-        } catch (SQLException e) {}
+        } catch (SQLException e) {
+        }
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-M-d");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * " + remarks);
-        topLevelClass.addJavaDocLine(" *");
         topLevelClass.addJavaDocLine(" * @author " + author);
         topLevelClass.addJavaDocLine(" * @date " + format.format(new Date()));
-        topLevelClass.addJavaDocLine(" *");
         topLevelClass.addJavaDocLine(" */");
         return true;
     }
 
-    public boolean modelRecordWithBLOBsClassGenerated(TopLevelClass topLevelClass,
-                                                      IntrospectedTable introspectedTable) {
+    /**
+     * 给属性添加注释
+     *
+     * @param field
+     * @param topLevelClass
+     * @param introspectedColumn
+     * @param introspectedTable
+     * @param modelClassType
+     * @return
+     */
+    public boolean modelFieldGenerated(Field field, TopLevelClass topLevelClass, IntrospectedColumn introspectedColumn, IntrospectedTable introspectedTable, ModelClassType modelClassType) {
+        String remark = introspectedColumn.getRemarks();
+        field.addJavaDocLine("/**");
+        field.addJavaDocLine(" * " + remark);
+        field.addJavaDocLine(" */");
+        return true;
+    }
+
+    public boolean modelRecordWithBLOBsClassGenerated(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
         return true;
     }
 
@@ -72,23 +85,15 @@ public class CommentPlugin extends PluginAdapter {
         if (null != rs) {
             try {
                 rs.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
         if (connection != null) {
             try {
                 connection.close();
-            } catch (SQLException e) {}
+            } catch (SQLException e) {
+            }
         }
 
-    }
-
-    public static void generate() {
-        String config = CommentPlugin.class.getClassLoader().getResource("generatorConfig.xml").getFile();
-        String[] arg = { "-configfile", config, "-overwrite" };
-        ShellRunner.main(arg);
-    }
-
-    public static void main(String[] args) {
-        generate();
     }
 }

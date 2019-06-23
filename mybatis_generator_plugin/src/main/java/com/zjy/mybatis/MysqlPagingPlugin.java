@@ -127,8 +127,4 @@ public class MysqlPagingPlugin extends PluginAdapter {
         String[] arg = { "-configfile", config, "-overwrite" };
         ShellRunner.main(arg);
     }
-
-    public static void main(String[] args) {
-        generate();
-    }
 }

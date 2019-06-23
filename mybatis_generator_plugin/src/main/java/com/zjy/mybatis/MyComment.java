@@ -11,7 +11,6 @@ import org.mybatis.generator.config.PropertyRegistry;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
-import java.util.Set;
 
 import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 

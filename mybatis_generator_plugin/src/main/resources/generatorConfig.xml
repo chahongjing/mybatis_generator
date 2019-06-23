@@ -55,9 +55,9 @@
         <plugin type="com.zjy.mybatis.MysqlPagingPlugin"/>
         <plugin type="com.zjy.mybatis.CommentPlugin">
             <!-- 制定java bean的作者，默认情况下会读取计算机当前用户作为作者 -->
-            <!--<property name="modelClassAuthor" value="p0po" />-->
+            <property name="modelClassAuthor" value="${classModelAuthor}" />
         </plugin>
-        <commentGenerator>
+        <commentGenerator type="com.zjy.mybatis.MyComment">
             <!-- 不生成原生的注解信息 -->
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
@@ -168,11 +168,11 @@
 
                     注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
                  -->
-        <table tableName="ws_appeal_order" domainObjectName="AppealOrder"></table>
-        <table tableName="userinfo" domainObjectName="UserInfo" enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
+        <table tableName="test" domainObjectName="TestTable"></table>
+<!--        <table tableName="userinfo" domainObjectName="UserInfo" enableCountByExample="false"-->
+<!--               enableUpdateByExample="false"-->
+<!--               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
+<!--            <property name="useActualColumnNames" value="true"/>-->
             <!--<generatedKey column="ID" sqlStatement="DB2" identity="true" />-->
             <!--<columnOverride column="DATE_FIELD" property="startDate" />-->
             <!--<ignoreColumn column="FRED" />-->
@@ -280,6 +280,6 @@
                 注意，一个table元素中可以有多个ignoreColumn元素
             <ignoreColumn column="deptId" delimitedColumnName=""/>
             -->
-        </table>
+<!--        </table>-->
     </context>
 </generatorConfiguration>
