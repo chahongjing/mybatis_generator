@@ -17,12 +17,9 @@
     	<mybatis>3.5.1</mybatis>
     	<mybatis.generator>1.3.2</mybatis.generator>
     	<mybatis.spring>2.0.1</mybatis.spring>
-    	<c3p0>0.9.5.4</c3p0>
     	<guava>23.0</guava>
     	<commons.lang3>3.9</commons.lang3>
-    	<commons.beanutils>1.9.3</commons.beanutils>
     	<commons.io>2.6</commons.io>
-    	<commons.fileupload>1.4</commons.fileupload>
     </properties>
 
     <dependencyManagement>
@@ -37,11 +34,6 @@
 	            <groupId>mysql</groupId>
 	            <artifactId>mysql-connector-java</artifactId>
 	            <version>${mysql}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>com.mchange</groupId>
-	            <artifactId>c3p0</artifactId>
-	            <version>${c3p0}</version>
 	        </dependency>
 	        <!-- database -->
 	        <dependency>
@@ -67,19 +59,9 @@
 	            <version>${commons.lang3}</version>
 	        </dependency>
 	        <dependency>
-	            <groupId>commons-beanutils</groupId>
-	            <artifactId>commons-beanutils</artifactId>
-	            <version>${commons.beanutils}</version>
-	        </dependency>
-	        <dependency>
 	            <groupId>commons-io</groupId>
 	            <artifactId>commons-io</artifactId>
 	            <version>${commons.io}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>commons-fileupload</groupId>
-	            <artifactId>commons-fileupload</artifactId>
-	            <version>${commons.fileupload}</version>
 	        </dependency>
 	        <!--utils-->
 	    </dependencies>
