@@ -82,7 +82,7 @@
     targetPackage：生成的类要放的包，真实的包受enableSubPackages属性控制；
     targetProject：目标项目，指定一个存在的目录下，生成的内容会放到指定目录中，如果目录不存在，MBG不会自动建目录
  -->
-        <javaModelGenerator targetPackage="com.zjy.entities" targetProject="${modelurl}">
+        <javaModelGenerator targetPackage="${model.package}" targetProject="${model.url}">
             <!--  for MyBatis3/MyBatis3Simple
                 自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；
              -->
@@ -112,7 +112,7 @@
         或者只使用Mapper接口+Annotation，所以，如果 javaClientGenerator配置中配置了需要生成XML的话，这个元素就必须配置
     targetPackage/targetProject:同javaModelGenerator
  -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="${xmlurl}">
+        <sqlMapGenerator targetPackage="${mapper.package}" targetProject="${mapper.url}">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 对于mybatis来说，即生成Mapper接口，注意，如果没有配置该元素，那么默认不会生成Mapper接口
@@ -123,7 +123,7 @@
                 3，XMLMAPPER：会生成Mapper接口，接口完全依赖XML；
             注意，如果context是MyBatis3Simple：只支持ANNOTATEDMAPPER和XMLMAPPER
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.zjy.bll.dao" targetProject="${mapperurl}">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${dao.package}" targetProject="${dao.url}">
             <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="true"/>
             <!-- 可以为所有生成的接口添加一个父接口，但是MBG只负责生成，不负责检查
@@ -169,6 +169,7 @@
                     注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
                  -->
         <table tableName="test" domainObjectName="TestTable"></table>
+        <table tableName="work_order" domainObjectName="WorkOrder"></table>
 <!--        <table tableName="userinfo" domainObjectName="UserInfo" enableCountByExample="false"-->
 <!--               enableUpdateByExample="false"-->
 <!--               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">-->
