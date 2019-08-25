@@ -11,6 +11,7 @@ import org.mybatis.generator.config.PropertyRegistry;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+import java.util.Set;
 
 import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 
@@ -55,6 +56,31 @@ public class MyComment implements CommentGenerator {
     public void addRootComment(XmlElement rootElement) {
         // add no document level comments by default
         return;
+    }
+
+    @Override
+    public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable, Set<FullyQualifiedJavaType> set) {
+
+    }
+
+    @Override
+    public void addGeneralMethodAnnotation(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> set) {
+
+    }
+
+    @Override
+    public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable, Set<FullyQualifiedJavaType> set) {
+
+    }
+
+    @Override
+    public void addFieldAnnotation(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn, Set<FullyQualifiedJavaType> set) {
+
+    }
+
+    @Override
+    public void addClassAnnotation(InnerClass innerClass, IntrospectedTable introspectedTable, Set<FullyQualifiedJavaType> set) {
+
     }
 
     public void addConfigurationProperties(Properties properties) {
@@ -153,6 +179,11 @@ public class MyComment implements CommentGenerator {
         sb.append(introspectedTable.getFullyQualifiedTable());
         field.addJavaDocLine(sb.toString().replace("\n", " "));
         field.addJavaDocLine(" */");
+    }
+
+    @Override
+    public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+
     }
 
     public void addGeneralMethodComment(Method method, IntrospectedTable introspectedTable) {

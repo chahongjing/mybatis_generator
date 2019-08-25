@@ -1,9 +1,12 @@
 package com.zjy.mybatis;
 
-import org.mybatis.generator.api.*;
+import org.mybatis.generator.api.FullyQualifiedTable;
+import org.mybatis.generator.api.IntrospectedColumn;
+import org.mybatis.generator.api.IntrospectedTable;
+import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.internal.db.ConnectionFactory;
+import org.mybatis.generator.internal.JDBCConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -34,8 +37,7 @@ public class CommentPlugin extends PluginAdapter {
 
         FullyQualifiedTable table = introspectedTable.getFullyQualifiedTable();
         try {
-            Connection connection = ConnectionFactory.getInstance().getConnection(
-                    context.getJdbcConnectionConfiguration());
+            Connection connection = new JDBCConnectionFactory(context.getJdbcConnectionConfiguration()).getConnection();
             ResultSet rs = connection.getMetaData().getTables(table.getIntrospectedCatalog(),
                     table.getIntrospectedSchema(), table.getIntrospectedTableName(), null);
 
