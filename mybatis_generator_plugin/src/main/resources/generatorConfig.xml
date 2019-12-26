@@ -65,7 +65,7 @@
         <jdbcConnection driverClass="${db.driverClassName}" connectionURL="${db.phyUrl}" userId="${db.userName}"
                         password="${db.password}"/>
 
-        <javaTypeResolver>
+        <!--<javaTypeResolver>
             <!--
                 true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型
                 false：默认,
@@ -73,7 +73,9 @@
                     scale=0;length[10,18]：使用Long；
                     scale=0;length[5,9]：使用Integer；
                     scale=0;length<5：使用Short；
-             -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>-->
+        <javaTypeResolver type="com.zjy.mybatis.MyJavaTypeResolverDefaultImpl">
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- model -->
