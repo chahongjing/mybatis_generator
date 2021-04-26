@@ -19,7 +19,7 @@
     	<mybatis.spring>2.0.1</mybatis.spring>
     	<guava>23.0</guava>
     	<commons.lang3>3.9</commons.lang3>
-    	<commons.io>2.6</commons.io>
+    	<commons.io>2.7</commons.io>
     </properties>
 
     <dependencyManagement>
